@@ -1,0 +1,26 @@
+project_name: "GalaxEye Binary Change Detection"
+
+data:
+  train_dir: "C:/Users/madhu naik/Downloads/train/train"
+  val_dir: "C:/Users/madhu naik/Downloads/val/val"
+  test_dir: "C:/Users/madhu naik/Downloads/test/test"
+  batch_size: 16
+  num_workers: 4
+
+training:
+  epochs: 50
+  learning_rate: 1.0e-3
+  weight_decay: 1.0e-4
+  seed: 42
+  device: "cuda"
+
+model:
+  name: "siam_unet"
+  # Channels will be adjusted based on the dataset properties
+  in_channels: 3 
+  out_channels: 1
+
+loss:
+  name: "bce_with_logits"
+  # Handle class imbalance
+  pos_weight: 10.0

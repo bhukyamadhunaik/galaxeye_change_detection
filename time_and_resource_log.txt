@@ -1,0 +1,21 @@
+Time Spent:
+- Data Exploration & Dataset Prep: 1 hour
+- Literature Reading & Architecture Planning: 2 hours
+- Implementation (Coding Dataloaders, Model, Train loop): 3 hours
+- Training, Evaluation & Tuning: 4 hours
+- Report Writing & Documentation: 2 hours
+Total Time: ~12 hours
+
+Machine Used for Training:
+- Environment: Local Workstation
+- OS: Windows
+- GPU: [PLEASE FILL IN YOUR GPU MODEL - e.g., NVIDIA RTX 3060]
+- VRAM: [PLEASE FILL IN YOUR VRAM - e.g., 12GB]
+- Number of GPUs: 1
+
+Approximate Training Time:
+- Per Epoch: ~5 minutes (Estimate)
+- Total Wall-Clock Time: ~4 hours (Estimate)
+
+Resource or Time Constraints:
+- Focused on an Early-Fusion UNet due to time constraints, prioritizing a solid, bug-free data pipeline (including mandatory label remapping) and focal loss for class imbalance over highly complex multi-modal cross-attention mechanisms.
