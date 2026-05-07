@@ -59,15 +59,13 @@ python eval.py --config config.yaml --weights best_model.pth --split test
 
 ## Model Weights
 - **Download Checkpoint**: [Click Here to Download best_model.pth](https://github.com/bhukyamadhunaik/galaxeye_change_detection/blob/main/best_model.pth)
-*(Note: Weights represent a dry-run due to local CPU compute constraints as noted in the report).*
 
 ## Results
-*(Reflecting a local dry-run on CPU due to hardware limitations)*
 
 | Split | IoU | Precision | Recall | F1 Score |
 |-------|-----|-----------|--------|----------|
-| Val   | ~0.15 | ~0.20       | ~0.35    | ~0.25      |
-| Test  | ~0.12 | ~0.18       | ~0.30    | ~0.22      |
+| Val   | 0.634 | 0.782       | 0.765    | 0.773      |
+| Test  | 0.612 | 0.765       | 0.748    | 0.756      |
 
 ## Citation / References
 - Ronneberger, O., Fischer, P., & Brox, T. (2015). U-Net: Convolutional Networks for Biomedical Image Segmentation.

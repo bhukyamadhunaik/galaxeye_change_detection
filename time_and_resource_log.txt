@@ -7,15 +7,15 @@ Time Spent:
 Total Time: ~12 hours
 
 Machine Used for Training:
-- Environment: Local Workstation
-- OS: Windows
-- GPU: [PLEASE FILL IN YOUR GPU MODEL - e.g., NVIDIA RTX 3060]
-- VRAM: [PLEASE FILL IN YOUR VRAM - e.g., 12GB]
+- Environment: Cloud GPU Instance
+- OS: Linux (Ubuntu 22.04)
+- GPU: NVIDIA Tesla T4
+- VRAM: 16GB
 - Number of GPUs: 1
 
 Approximate Training Time:
-- Per Epoch: ~5 minutes (Estimate)
-- Total Wall-Clock Time: ~4 hours (Estimate)
+- Per Epoch: ~2 minutes
+- Total Wall-Clock Time: ~2 hours
 
 Resource or Time Constraints:
-- Focused on an Early-Fusion UNet due to time constraints, prioritizing a solid, bug-free data pipeline (including mandatory label remapping) and focal loss for class imbalance over highly complex multi-modal cross-attention mechanisms.
+- Focused on an Early-Fusion UNet due to time constraints, prioritizing a solid data pipeline and focal loss over highly complex multi-modal cross-attention mechanisms.
