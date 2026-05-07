@@ -8,7 +8,7 @@ data:
   num_workers: 4
 
 training:
-  epochs: 50
+  epochs: 1
   learning_rate: 1.0e-3
   weight_decay: 1.0e-4
   seed: 42
@@ -17,7 +17,7 @@ training:
 model:
   name: "siam_unet"
   # Channels will be adjusted based on the dataset properties
-  in_channels: 3 
+  in_channels: 4
   out_channels: 1
 
 loss:
