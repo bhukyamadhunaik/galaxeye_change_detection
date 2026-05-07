@@ -10,25 +10,36 @@ import os
 from dataset import ChangeDetectionDataset
 from model import UNet
 
-def calculate_metrics(y_true, y_pred):
-    y_true = y_true.flatten()
-    y_pred = y_pred.flatten()
-    
-    tn, fp, fn, tp = confusion_matrix(y_true, y_pred, labels=[0, 1]).ravel()
-    
-    epsilon = 1e-7
-    precision = tp / (tp + fp + epsilon)
-    recall = tp / (tp + fn + epsilon)
-    f1 = 2 * (precision * recall) / (precision + recall + epsilon)
-    iou = tp / (tp + fp + fn + epsilon)
-    
-    return {
-        'iou': iou,
-        'precision': precision,
-        'recall': recall,
-        'f1': f1,
-        'confusion_matrix': [[tn, fp], [fn, tp]]
-    }
+class ConfusionMatrix:
+    def __init__(self):
+        self.tp = 0
+        self.fp = 0
+        self.fn = 0
+        self.tn = 0
+
+    def update(self, y_true, y_pred):
+        y_true = y_true.flatten()
+        y_pred = y_pred.flatten()
+        cm = confusion_matrix(y_true, y_pred, labels=[0, 1]).ravel()
+        self.tn += cm[0]
+        self.fp += cm[1]
+        self.fn += cm[2]
+        self.tp += cm[3]
+
+    def get_metrics(self):
+        epsilon = 1e-7
+        precision = self.tp / (self.tp + self.fp + epsilon)
+        recall = self.tp / (self.tp + self.fn + epsilon)
+        f1 = 2 * (precision * recall) / (precision + recall + epsilon)
+        iou = self.tp / (self.tp + self.fp + self.fn + epsilon)
+        
+        return {
+            'iou': iou,
+            'precision': precision,
+            'recall': recall,
+            'f1': f1,
+            'confusion_matrix': [[self.tn, self.fp], [self.fn, self.tp]]
+        }
 
 def main():
     parser = argparse.ArgumentParser(description="Evaluate Change Detection Model")
@@ -55,8 +66,7 @@ def main():
 
     model.eval()
     
-    all_targets = []
-    all_preds = []
+    cm_tracker = ConfusionMatrix()
 
     print(f"Starting evaluation on {args.split} split...")
     with torch.no_grad():
@@ -67,13 +77,9 @@ def main():
             probs = torch.sigmoid(outputs)
             preds = (probs > 0.5).long().cpu().numpy()
             
-            all_targets.append(targets.numpy())
-            all_preds.append(preds)
+            cm_tracker.update(targets.numpy(), preds)
             
-    all_targets = np.concatenate(all_targets)
-    all_preds = np.concatenate(all_preds)
-    
-    metrics = calculate_metrics(all_targets, all_preds)
+    metrics = cm_tracker.get_metrics()
     
     print("\n--- Evaluation Results ---")
     print(f"IoU:       {metrics['iou']:.4f}")
